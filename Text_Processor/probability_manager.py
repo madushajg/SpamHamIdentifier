@@ -1,4 +1,4 @@
-import os
+import os.path
 from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -10,9 +10,13 @@ english_stops = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 tokenizer = TweetTokenizer()
 
-hamTextOpen = os.path.join(os.path.dirname(__file__), "ham.txt")
+root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir)+'/Resources'
+os.chdir(root_path)
+hamTextOpen = os.path.join(root_path, "ham.txt")
+spamTextOpen = os.path.join(root_path, "spam.txt")
+
+
 hamText = open(hamTextOpen, 'r')
-spamTextOpen = os.path.join(os.path.dirname(__file__), "spam.txt")
 spamText = open(spamTextOpen, 'r')
 
 ham_massege = hamText.read()
