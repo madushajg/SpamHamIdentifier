@@ -1,4 +1,7 @@
 import os.path
+from pathlib import Path
+
+from Text_Processor import TSV_classifier
 from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -10,16 +13,18 @@ english_stops = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 tokenizer = TweetTokenizer()
 
-# root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir) + '/Resources'
-# os.chdir(root_path)
-# hamTextOpen = os.path.join(root_path, "ham.txt")
-# spamTextOpen = os.path.join(root_path, "spam.txt")
-
 dir = os.path.dirname(__file__)
-# print(dir)
-root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir) + '/HamSpam/Resources'
-# print(root_path)
+root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir) + '/Resources'
 os.chdir(root_path)
+
+ham_file = Path(root_path+"/ham.txt")
+spam_file = Path(root_path+"/spam.txt")
+if ham_file.is_file() & spam_file.is_file():
+    print("ham.txt and spam.txt are already there")
+else:
+    TSV_classifier.clasify_tsv()
+
+
 hamTextOpen = os.path.join(root_path, "ham.txt")
 spamTextOpen = os.path.join(root_path, "spam.txt")
 
