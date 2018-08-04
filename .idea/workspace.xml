@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59ecba4c-bbe9-41f4-b8f2-5e3795d9b36b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Resources/.fuse_hidden0000041800000006" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Resources/.fuse_hidden0000041900000005" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Text_Processor/content_manager.py" afterPath="$PROJECT_DIR$/Text_Processor/content_manager.py" />
-    </list>
+    <list default="true" id="59ecba4c-bbe9-41f4-b8f2-5e3795d9b36b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +166,7 @@
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../82DAE447DAE43955/NLP_ASSINMENT/SpamHamIdentifier" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../82DAE447DAE43955/Assignment_NLP/SpamHamIdentifier" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
