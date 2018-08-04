@@ -1,16 +1,20 @@
-from Text_Processor import probability_manager
+from Text_Processor import content_manager
 from nltk.tokenize import TweetTokenizer
+from nltk.probability import FreqDist
+from collections import Counter
 
-uni_bigramvalues = probability_manager.activities()
+tk, sw_tk, lm_tk = content_manager.preprocessor()
+uni_ham, uni_spam = content_manager.find_unigrams(lm_tk)
+bi_ham, bi_spam = content_manager.find_bigrams(lm_tk)
 tokenizer = TweetTokenizer()
 
-fdist_ham = uni_bigramvalues[0]
-fdist_spam = uni_bigramvalues[1]
-bigrams_ham = uni_bigramvalues[2]
-bigrams_spam = uni_bigramvalues[3]
+unigrams_ham = FreqDist(uni_ham)
+unigrams_spam = FreqDist(uni_spam)
+bigrams_ham = Counter(bi_ham)
+bigrams_spam = Counter(bi_spam)
 
 
-def find_bigrams(tklist):
+def find_new_bigrams(tklist):
     bg = list(())
     pr = None
     for tk in tklist:
@@ -27,6 +31,8 @@ def calculate_probabilities(new_tokens, fdist, bigrams):
         b = t[1].lower()
         uni_count = fdist[a]
         bi_count = bigrams[a, b]
+        # print(a, uni_count)
+        # print(a, b, bi_count)
         pv.append((uni_count, bi_count, (bi_count + 1) / (uni_count + len(fdist))))
     return pv
 
@@ -39,27 +45,40 @@ def find_final_probability(pvalues):
 
 
 def find_type():
-    msg = input()
+    msg = input("Enter the message :")
     msg_tokens = tokenizer.tokenize(msg)
+    lemmatized_msg_tokens = content_manager.lemmatize_tokens(msg_tokens)
 
-    bigrams_msg = find_bigrams(msg_tokens)
+    bigrams_msg = find_new_bigrams(lemmatized_msg_tokens)
 
-    probability_values_ham = calculate_probabilities(bigrams_msg, fdist_ham, bigrams_ham)
-    probability_values_spam = calculate_probabilities(bigrams_msg, fdist_spam, bigrams_spam)
+    probability_values_ham = calculate_probabilities(bigrams_msg, unigrams_ham, bigrams_ham)
+    probability_values_spam = calculate_probabilities(bigrams_msg, unigrams_spam, bigrams_spam)
 
-    print(probability_values_ham)
-    print(probability_values_spam)
+    # print(probability_values_ham)
+    # print(probability_values_spam)
 
     final_prob_ham = find_final_probability(probability_values_ham)
     final_prob_spam = find_final_probability(probability_values_spam)
 
-    print(format(final_prob_ham, '.12g'))
-    print(format(final_prob_spam, '.12g'))
+    print("Ham Probability :", format(final_prob_ham, '.12g'))
+    print("Spam Probability: ", format(final_prob_spam, '.12g'))
 
+    # probability_values_ham = calculate_probabilities(bigrams_msg, fdist_ham, bigrams_ham)
+    # print(probability_values_ham)
+    # final_prob_ham = find_final_probability(probability_values_ham)
+    # print(format(final_prob_ham, '.12g'))
+
+    # probability_values_spam = calculate_probabilities(bigrams_msg, fdist_spam, bigrams_spam)
+    # print(probability_values_spam)
+    # final_prob_spam = find_final_probability(probability_values_spam)
+    # print(format(final_prob_spam, '.12g'))
+
+    print("------------------------------------------------------------------------------------")
     if final_prob_ham >= final_prob_spam:
         print("Ham")
     else:
         print("Spam")
+    print("____________________________________________________________________________________")
 
 
 if __name__ == '__main__':
