@@ -12,6 +12,7 @@ lemmatizer = WordNetLemmatizer()
 tokenizer = TweetTokenizer()
 
 root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir) + '/SpamHamIdentifier/Resources'
+# root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir) + '/Resources'
 os.chdir(root_path)
 
 
@@ -108,7 +109,5 @@ def find_bigrams(tknz):
 if __name__ == '__main__':
     tk, sw_tk, lm_tk = preprocessor()
     uni_ham, uni_spam = find_unigrams(lm_tk)
-    # print(Counter(uni_spam))
-    # print(FreqDist(uni_spam).items())
     bi_ham, bi_spam = find_bigrams(lm_tk)
     print(Counter(bi_spam))

@@ -13,6 +13,7 @@ unigrams_spam = FreqDist(uni_spam)
 bigrams_ham = Counter(bi_ham)
 bigrams_spam = Counter(bi_spam)
 
+print(unigrams_spam.items())
 
 def find_new_bigrams(tklist):
     bg = list(())
@@ -24,16 +25,16 @@ def find_new_bigrams(tklist):
     return bg
 
 
-def calculate_probabilities(new_tokens, fdist, bigrams):
+def calculate_probabilities(new_tokens, unig, bigrams):
     pv = list(())
     for t in new_tokens:
         a = t[0].lower()
         b = t[1].lower()
-        uni_count = fdist[a]
+        uni_count = unig[a]
         bi_count = bigrams[a, b]
         # print(a, uni_count)
         # print(a, b, bi_count)
-        pv.append((uni_count, bi_count, (bi_count + 1) / (uni_count + len(fdist))))
+        pv.append((uni_count, bi_count, (bi_count + 1) / (uni_count + len(unig))))
     return pv
 
 
@@ -62,16 +63,6 @@ def find_type():
 
     print("Ham Probability :", format(final_prob_ham, '.12g'))
     print("Spam Probability: ", format(final_prob_spam, '.12g'))
-
-    # probability_values_ham = calculate_probabilities(bigrams_msg, fdist_ham, bigrams_ham)
-    # print(probability_values_ham)
-    # final_prob_ham = find_final_probability(probability_values_ham)
-    # print(format(final_prob_ham, '.12g'))
-
-    # probability_values_spam = calculate_probabilities(bigrams_msg, fdist_spam, bigrams_spam)
-    # print(probability_values_spam)
-    # final_prob_spam = find_final_probability(probability_values_spam)
-    # print(format(final_prob_spam, '.12g'))
 
     print("------------------------------------------------------------------------------------")
     if final_prob_ham >= final_prob_spam:
