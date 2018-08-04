@@ -11,7 +11,7 @@ english_stops = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 tokenizer = TweetTokenizer()
 
-root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir) + '/HamSpam/Resources'
+root_path = os.path.normpath(os.getcwd() + os.sep + os.pardir) + '/SpamHamIdentifier/Resources'
 os.chdir(root_path)
 
 
