@@ -1,5 +1,5 @@
 matplotlib==1.5.2
-nltk==3.3
+nltk==3.4.5
 numpy==1.15.0
 pandas==0.19.0
 passlib==1.6.5
